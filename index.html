@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Novel Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <button class="credit-btn" onclick="toggleCredit()" title="ดูเครดิต">?</button>
+
+        <div class="logo-container">
+            <img src="https://img2.pic.in.th/-181_20260411152816.md.png" alt="Game Logo" class="logo">
+        </div>
+
+        <div class="menu-buttons">
+            <button class="btn btn-start" onclick="alert('Starting Game...')">START</button>
+            <button class="btn btn-wishboard" onclick="alert('Opening Wishboard...')">Wishboard</button>
+        </div>
+
+        <div id="creditOverlay" class="overlay" onclick="closeOverlay(event)">
+            <div class="credit-card">
+                <h2>Special Thanks</h2>
+                <div class="credit-content">
+                    <p><b>Head Project:</b> Your Name</p>
+                    <p><b>Character Artist:</b> Artist Name</p>
+                    <p><b>Background Artist:</b> Artist Name</p>
+                    <p><b>Developer:</b> Your Name</p>
+                    <p><b>Music:</b> Lo-fi Coffee Shop</p>
+                </div>
+                <button class="close-btn" onclick="toggleCredit()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
