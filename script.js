@@ -11,76 +11,68 @@ function closeOverlay(event) {
     }
 }
 
+// ข้อมูลเนื้อเรื่อง
 const storyData = [
-    {
-        // ฉากที่ 1: บรรยาย
-        bg: "https://img2.pic.in.th/IMG_7830564ed53c7a0bceb1.md.jpeg",
-        character: null,
-        name: null,
-        text: "คุณยืนอยู่หน้าร้านกาแฟที่ดูอบอุ่น กลิ่นหอมจางๆ ของเมล็ดกาแฟทำให้คุณหยุดนิ่ง...",
-        choices: [
-            { text: "เข้าไปในร้าน", nextStep: 2 }, // ไปสู่ฉาก index 2 (ฉากที่ 3)
-            { text: "ไม่เข้าไป", action: "home" } // กลับหน้าหลัก
-        ]
+    { type: 'desc', text: 'แสงแดดยามบ่ายส่องผ่านกระจกหน้าร้านกาแฟที่คุ้นเคย...' },
+    { type: 'talk', name: 'พนักงานร้าน', text: 'ยินดีต้อนรับครับ วันนี้รับเมนูเดิมเหมือนทุกวันไหมครับ?' },
+    { type: 'choice', text: 'คุณจะตอบว่าอย่างไร?', 
+      options: [
+        { text: 'เอาเหมือนเดิมค่ะ', next: 4 },
+        { text: 'วันนี้อยากลองเมนูใหม่ดู', next: 5 }
+      ]
     },
-    {
-        // ฉากที่ 2: (ถ้ามีเนื้อเรื่องคั่นกลาง)
-        text: "เนื้อเรื่องระหว่างทาง..."
-    },
-    {
-        // ฉากที่ 3: ฉากในร้านหลังจากเลือกข้อ A
-        bg: "https://img2.pic.in.th/IMG_7830564ed53c7a0bceb1.md.jpeg",
-        character: "https://img2.pic.in.th/-182_20260411164509.md.png",
-        name: "บาริสต้าหนุ่ม",
-        text: "ยินดีต้อนรับครับ! กำลังรออยู่พอดีเลย เชิญนั่งก่อนสิครับ"
-    }
+    { type: 'desc', text: 'คุณยิ้มตอบพนักงานก่อนจะไปหาที่นั่งริมหน้าต่างที่ประจำ...' }, // next: 4
+    { type: 'desc', text: 'คุณกวาดสายตามองเมนูใหม่บนบอร์ดไม้หน้าเคาน์เตอร์...' }  // next: 5
 ];
 
 let currentStep = 0;
 
-function renderScene() {
-    const scene = storyData[currentStep];
-    const nameTag = document.getElementById('name-tag');
-    const charImg = document.getElementById('character-img');
-    const dialogueText = document.getElementById('dialogue-text');
-    const choicesContainer = document.getElementById('choices-container');
-    const gameScreen = document.getElementById('game-screen');
+function startGame() {
+    document.querySelector('.game-container').classList.add('hidden'); // ซ่อนเมนู
+    document.getElementById('gameplay-scene').classList.remove('hidden'); // โชว์ฉากเกม
+    renderDialogue();
+}
 
-    // ล้างค่าตัวเลือกเดิมก่อน
-    choicesContainer.innerHTML = "";
-
-    // 1. แสดงพื้นหลังและตัวละคร
-    gameScreen.style.backgroundImage = `url(${scene.bg})`;
-    charImg.style.display = scene.character ? "block" : "none";
-    if (scene.character) charImg.src = scene.character;
-
-    // 2. แสดง Name Tag
-    if (scene.name) {
-        nameTag.innerText = scene.name;
-        nameTag.style.display = "block";
-    } else {
-        nameTag.style.display = "none";
+function nextDialogue() {
+    if (storyData[currentStep].type === 'choice') return; // ถ้าเป็นตัวเลือก ห้ามคลิกข้าม
+    
+    currentStep++;
+    if (currentStep < storyData.length) {
+        renderDialogue();
     }
+}
 
-    // 3. แสดงเนื้อเรื่อง
-    dialogueText.innerText = scene.text;
+function renderDialogue() {
+    const data = storyData[currentStep];
+    const textEl = document.getElementById('dialogue-text');
+    const nameTag = document.getElementById('name-tag');
+    const choiceBox = document.getElementById('choice-container');
 
-    // 4. สร้างปุ่มตัวเลือก (ถ้ามี)
-    if (scene.choices) {
-        scene.choices.forEach(choice => {
-            const button = document.createElement('button');
-            button.className = 'choice-btn';
-            button.innerText = choice.text;
-            
-            button.onclick = () => {
-                if (choice.action === "home") {
-                    location.reload(); // กลับหน้าหลัก (รีโหลดหน้าเว็บ)
-                } else {
-                    currentStep = choice.nextStep;
-                    renderScene();
-                }
+    // ล้างค่าเก่า
+    choiceBox.classList.add('hidden');
+    choiceBox.innerHTML = '';
+
+    if (data.type === 'desc') {
+        nameTag.classList.add('hidden');
+        textEl.textContent = data.text;
+    } 
+    else if (data.type === 'talk') {
+        nameTag.classList.remove('hidden');
+        nameTag.textContent = data.name;
+        textEl.textContent = data.text;
+    }
+    else if (data.type === 'choice') {
+        textEl.textContent = data.text;
+        choiceBox.classList.remove('hidden');
+        data.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = "w-64 py-3 bg-white/70 text-[#7a5c48] font-bold rounded-full border-2 border-white shadow-lg backdrop-blur-sm hover:scale-105 transition-transform drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]";
+            btn.textContent = opt.text;
+            btn.onclick = () => {
+                currentStep = opt.next;
+                renderDialogue();
             };
-            choicesContainer.appendChild(button);
+            choiceBox.appendChild(btn);
         });
     }
 }

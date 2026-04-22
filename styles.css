@@ -7,11 +7,10 @@
 
 body, html {
     height: 100%;
-    overflow: hidden; /* ป้องกันการเลื่อนหน้าจอ */
-    background-color: #f6e6dc; /* สีพื้นหลังสำรอง */
+    overflow: hidden;
+    background-color: #f6e6dc;
 }
 
-/* พื้นหลังหลักของเกม */
 .game-container {
     background-image: url('https://img2.pic.in.th/IMG_7825a630c755af16e393.md.jpeg');
     background-size: cover;
@@ -20,176 +19,20 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* จัดทุกอย่างให้อยู่ตรงกลาง */
+    justify-content: center;
     position: relative;
     padding: 20px;
 }
 
-/* --- ปรับปรุงปุ่มเครดิตมุมขวาบน --- */
-.credit-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #8d7365;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    z-index: 20; /* ให้อยู่เหนือโลโก้ */
-}
-
-.credit-btn:hover {
-    background-color: #fff;
-    transform: scale(1.1);
-}
-
-/* --- ปรับปรุงส่วนของโลโก้ (ขยายขนาด) --- */
-.logo-container {
-    width: 100%; /* ใช้ความกว้างเต็มที่ */
-    max-width: 1000px; /* ขยายขีดจำกัดความกว้างสูงสุดให้ใหญ่ขึ้นมาก */
-    margin-bottom: 20px; /* ลดระยะห่างด้านล่าง */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: float 4s ease-in-out infinite; /* ปรับแอนิเมชันให้ช้าลงเล็กน้อย */
-    z-index: 10;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-.logo {
-    width: 100%; /* ให้โลโก้ขยายเต็มพื้นที่ logo-container */
-    height: auto; /* รักษาสัดส่วน */
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.18)); /* เพิ่มเงาให้ดูมีมิติขึ้น */
-}
-
-/* --- กลุ่มปุ่มเมนูตรงกลาง --- */
-.menu-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* ลดระยะห่าง */
-    width: 220px; /* ปรับความกว้างเล็กน้อย */
-    z-index: 15; /* ให้อยู่เหนือโลโก้ส่วนล่าง */
-}
-
-.btn {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
-    text-align: center;
-    color: white;
-    text-decoration: none; /* สำหรับใช้กับ <a> tag */
-    display: inline-block;
-}
-
-/* สีปุ่ม START */
-.btn-start {
-    background-color: #b18e77; 
-}
-
-.btn-start:hover {
-    background-color: #9c7862;
-    transform: translateY(-2px);
-}
-
-/* สีปุ่ม Wishboard */
-.btn-wishboard {
-    background-color: #ccb9ad;
-}
-
-.btn-wishboard:hover {
-    background-color: #bca89a;
-    transform: translateY(-2px);
-}
-
-/* ---  หน้าต่างredit (Pop-up) --- */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(121, 92, 72, 0.3); /* สีน้ำตาลใส */
-    backdrop-filter: blur(5px); /* เบลอพื้นหลัง */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.4s ease;
-    z-index: 100;
-}
-
-.overlay.active {
-    visibility: visible;
-    opacity: 1;
-}
-
-.credit-card {
-    background-color: #efe0d4;
-    padding: 50px 30px;
-    border-radius: 25px;
-    width: 90%;
-    max-width: 380px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    color: #7a5c48;
-    transform: scale(0.8);
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+/* ... ก๊อปปี้ CSS ทั้งหมดที่คุณเขียนไว้มาใส่ต่อที่นี่ ... */
 
 .overlay.active .credit-card {
     transform: scale(1);
 }
 
-.credit-card h2 {
-    font-family: 'Fahkwang', sans-serif;
-    margin-bottom: 25px;
-    font-size: 2.5rem;
-    font-weight: normal;
-}
-
-.credit-content {
-    margin-bottom: 35px;
-    font-size: 1.1rem;
-    line-height: 2;
-}
-
-.close-btn {
-    background-color: #7a5c48;
-    border: 1.5px solid #7a5c48;
-    padding: 8px 25px;
-    border-radius: 12px;
-    cursor: pointer;
-    color: #efe0d4;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.close-btn:hover {
-    background-color: #7a5c48;
-    color: white;
-}
-
-/* การปรับแต่งสำหรับหน้าจอขนาดเล็ก (Mobile) */
 @media (max-width: 600px) {
     .logo-container {
-        max-width: 90%; /* ให้โลโก้เล็กลงหน่อยบนมือถือ */
+        max-width: 90%;
     }
     .menu-buttons {
         width: 180px;
@@ -198,81 +41,4 @@ body, html {
         font-size: 1rem;
         padding: 10px 15px;
     }
-}
-
-#character-layer {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 80%;
-    z-index: 5;
-}
-
-#character-img {
-    height: 100%;
-    object-fit: contain;
-}
-
-/* กล่องข้อความโปร่งใส 70% */
-#dialogue-container {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    max-width: 800px;
-    background: rgba(255, 255, 255, 0.7); 
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 8px 32px rgba(122, 92, 72, 0.1);
-    z-index: 10;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* ตัวอักษรสี 7a5c48 และเงา */
-#dialogue-text {
-    color: #7a5c48;
-    font-size: 1.15rem;
-    line-height: 1.8;
-    text-shadow: 0.5px 0.5px 0px #fff, 0px 0px 2px rgba(255,255,255,0.5);
-}
-
-/* Name Tag กรอบสี 7a5c48 */
-#name-tag {
-    position: absolute;
-    top: -20px;
-    left: 30px;
-    background: #7a5c48;
-    color: #ffffff;
-    padding: 6px 25px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-#choices-container {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.choice-btn {
-    background: rgba(255, 255, 255, 0.7); /* ขาวโปร่งใส 70% */
-    color: #7a5c48;                       /* ตัวอักษรสีน้ำตาล */
-    border: 1px solid rgba(122, 92, 72, 0.3);
-    padding: 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    text-shadow: 0.5px 0.5px 1px #fff;    /* เงาตัวอักษรช่วยให้อ่านง่าย */
-    transition: all 0.3s ease;
-}
-
-.choice-btn:hover {
-    background: #7a5c48;
-    color: #ffffff;
-    text-shadow: none;
 }
