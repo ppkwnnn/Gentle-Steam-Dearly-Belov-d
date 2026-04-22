@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visual Novel Game</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@300;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -22,8 +20,8 @@
         </div>
 
         <div class="menu-buttons">
-            <button class="btn btn-start" onclick="startGame()">START</button>
-            <button class="btn btn-wishboard" onclick="openWishboard()">Wishboard</button>
+            <button class="btn btn-start" onclick="alert('Starting Game...')">START</button>
+            <button class="btn btn-wishboard" onclick="alert('Opening Wishboard...')">Wishboard</button>
         </div>
 
         <div id="creditOverlay" class="overlay" onclick="closeOverlay(event)">
