@@ -7,7 +7,7 @@ const storyData = {
         nextScene: 'scene2'
     },
     scene2: {
-        bg: 'https://img2.pic.in.th/IMG_7825a630c755af16e393.md.jpeg',
+        bg: 'https://img2.pic.in.th/IMG_7826.md.jpe',
         type: 'narration-then-dialogue',
         narration: 'คุณเดินผ่านย่านการค้าที่คึกคัก กลิ่นหอมของเมล็ดกาแฟลอยมาแตะจมูก ชวนให้คุณหยุดเท้าหน้าร้านกาแฟเล็ก ๆ ร้านหนึ่ง',
         characterName: 'Y',
