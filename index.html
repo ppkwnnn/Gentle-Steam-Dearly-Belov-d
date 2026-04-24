@@ -15,13 +15,47 @@
     <div class="game-container">
         <button class="credit-btn" onclick="toggleCredit()" title="ดูเครดิต">?</button>
 
-        <div class="logo-container">
-            <img src="https://img2.pic.in.th/-181_20260411152816.md.png" alt="Game Logo" class="logo">
+        <!-- Menu Screen -->
+        <div id="menuScreen" class="menu-screen">
+            <div class="logo-container">
+                <img src="https://img2.pic.in.th/-181_20260411152816.md.png" alt="Game Logo" class="logo">
+            </div>
+
+            <div class="menu-buttons">
+                <button class="btn btn-start" onclick="startGame()">START</button>
+                <button class="btn btn-wishboard" onclick="alert('Opening Wishboard...')">Wishboard</button>
+            </div>
         </div>
 
-        <div class="menu-buttons">
-            <button class="btn btn-start" onclick="alert('Starting Game...')">START</button>
-            <button class="btn btn-wishboard" onclick="alert('Opening Wishboard...')">Wishboard</button>
+        <!-- Story Screen (Hidden until game starts) -->
+        <div id="storyScreen" class="story-screen hidden">
+            <!-- Background -->
+            <div class="story-bg"></div>
+
+            <!-- Character -->
+            <div class="character-container">
+                <img src="https://img2.pic.in.th/-182_20260411164509.md.png" alt="Character" class="character-image">
+            </div>
+
+            <!-- Narration Section -->
+            <div id="narrationSection" class="narration-section hidden">
+                <div class="narration-text" id="narrationText">This is a narration section.</div>
+            </div>
+
+            <!-- Dialogue Section -->
+            <div id="dialogueSection" class="dialogue-section hidden">
+                <div class="character-name" id="characterName">Character Name</div>
+                <div class="dialogue-box">
+                    <div class="dialogue-text" id="dialogueText">This is a dialogue.</div>
+                </div>
+            </div>
+
+            <!-- Choices Section -->
+            <div id="choicesSection" class="choices-section hidden">
+                <button class="choice-btn" onclick="makeChoice(1)">Choice 1</button>
+                <button class="choice-btn" onclick="makeChoice(2)">Choice 2</button>
+                <button class="choice-btn" onclick="makeChoice(3)">Choice 3</button>
+            </div>
         </div>
 
         <div id="creditOverlay" class="overlay" onclick="closeOverlay(event)">
