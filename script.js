@@ -9,7 +9,7 @@ const storyData = {
     scene2: {
         bg: 'https://img2.pic.in.th/IMG_7825a630c755af16e393.md.jpeg',
         type: 'narration-then-dialogue',
-        narration: 'คุณเดินผ่านย่านการค้าที่คึกคัก ร้านค้าเรียงรายมากมายอยู่ตามข้างทาง แต่กลับไม่มีร้านไหนที่ดึงดูดใจคุณได้เลย จนกระทั่ง ขาของคุณหยุดชะงักลงที่หน้าร้านกาแฟเล็ก ๆ ร้านหนึ่ง มันดูเรียบง่าย ไม่ได้หวือหวา แต่มันกลับให้ความรู้สึกอบอุ่นอย่างบอกไม่ถูก กลิ่นหอมจาง ๆ ของเมล็ดกาแฟที่ลอยมาแตะจมูก ชวนให้คุณนึกถึงความทรงจำเก่า ๆ ที่เกือบจะลืมเลือนไป ความรู้สึกชวนให้คิดถึงบางอย่างหรือใครบางคนที่ไม่ได้เจอมานาน ยืนมองอยู่หน้าร้านอยู่สักพักกำลังตัดสินใจว่าจะเข้าไปดีไหม',
+        narration: 'คุณเดินผ่านย่านการค้าที่คึกคัก กลิ่นหอมของเมล็ดกาแฟลอยมาแตะจมูก ชวนให้คุณหยุดเท้าหน้าร้านกาแฟเล็ก ๆ ร้านหนึ่ง',
         characterName: 'Y',
         dialogue: 'อืมจะลองเข้าไปดีมั้ยนะ ?',
         choices: {
@@ -122,6 +122,31 @@ function continueToDialogue() {
     }
 }
 
+// ฟังก์ชัน เอฟเฟกต์เครื่องพิมพ์ดีด
+function typewriterEffect(element, text, speed = 50) {
+    element.textContent = '';
+    let index = 0;
+    
+    function type() {
+        if (index < text.length) {
+            element.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, speed);
+        } else {
+            // เมื่อพิมพ์เสร็จ ให้แสดง dialogue
+            if (currentSceneData) {
+                showDialogue(currentSceneData.characterName, currentSceneData.dialogue);
+                document.getElementById('nextButton').classList.add('hidden');
+                if (currentSceneData.choices) {
+                    displayChoices(currentSceneData.choices);
+                }
+            }
+        }
+    }
+    
+    type();
+}
+
 // ฟังก์ชัน แสดง Choices พร้อมกับ callback
 function displayChoices(choices) {
     const choicesSection = document.getElementById('choicesSection');
@@ -149,13 +174,21 @@ function showNarration(text) {
     const dialogueSection = document.getElementById('dialogueSection');
     const choicesSection = document.getElementById('choicesSection');
     const characterContainer = document.querySelector('.character-container');
-    
-    document.getElementById('narrationText').textContent = text;
+    const narrationTextElement = document.getElementById('narrationText');
     
     narrationSection.classList.remove('hidden');
     dialogueSection.classList.add('hidden');
     choicesSection.classList.add('hidden');
     characterContainer.classList.remove('visible');
+    
+    // ใช้เอฟเฟกต์เครื่องพิมพ์ดีด
+    if (currentScene === 'scene2') {
+        // สำหรับ scene 2 ใช้เอฟเฟกต์เครื่องพิมพ์ดีด
+        typewriterEffect(narrationTextElement, text, 50);
+    } else {
+        // สำหรับ scene อื่นแสดงปกติ
+        narrationTextElement.textContent = text;
+    }
 }
 
 // ฟังก์ชัน แสดง Dialogue

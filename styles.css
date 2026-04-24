@@ -113,6 +113,14 @@ body, html {
     line-height: 1.6;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    min-height: 100px;
+}
+
+/* เอฟเฟกต์เครื่องพิมพ์ดีด */
+.typewriter {
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 /* --- Dialogue Section --- */
